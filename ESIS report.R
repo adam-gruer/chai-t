@@ -9,10 +9,11 @@
 #' 
 #' ## Overview
 #' This is a short demo on how R can be a very effective
-#'  tool for producing reports.  
+#' tool for producing reports.  
 #'  
 #' ## Operating system and R version 
-#'  Below are the details of the operating system and version of R used to create this report
+#'  Below are the details of the operating system and version of R used to 
+#'  create this report.
 #'  
 version
 #' ## Load packages
@@ -20,4 +21,13 @@ version
 #+ load-libs, include = TRUE
 suppressPackageStartupMessages({
 library(tidyverse)
+library(lubridate)
 })
+#' ## Create some test data for elective surgery wailist report
+#' 
+waitlist <- tibble(
+            month = seq.Date(
+                            from = ymd("2015 Oct 31"),
+                            to = ymd("2016 Oct 31"),
+                            by = "month" )
+            )
