@@ -101,3 +101,42 @@ change_description <- if (change < 0) {
 #'        "${change_description} ${change} ($[1.1f%%]{change_percent}) to ${commentary_month_waitlist}.",
 #'        " There were ${commentary_month_admitted} admissions from the waiting list and ${commentary_month_added}",
 #'          " children were added to the waiting list during the month."))`
+
+#' ### Monthly Admissions and Additions
+#+ admissions_additios-plot, echo = FALSE
+admissions_additions <- waitlist %>% 
+  select(month,
+         patients_added,
+         patients_admitted) %>%
+  gather(waitlist_action,number_patients, -month)
+
+ggplot(admissions_additions) +
+
+  geom_bar(mapping = aes(
+    x = waitlist_action,
+    y = number_patients ,
+    fill = waitlist_action),
+    position = "dodge",
+    stat  = "identity") +
+  facet_wrap(~month)+
+  
+  scale_y_continuous(name = "Patients") +
+  theme_bw() +
+  ggtitle(stringr::str_interp("${hospital_name} - Monthly Waitlist Admissions and Additions"))
+
+
+  ggplot(admissions_additions) +
+  
+  geom_bar(mapping = aes(
+    x = month,
+    y = number_patients ,
+    fill = waitlist_action),
+    position = "dodge",
+    stat  = "identity") +
+  facet_wrap(~waitlist_action)+
+  scale_x_date(date_breaks = "1 month",
+               date_labels = "%b %y") +
+  scale_y_continuous(name = "Patients") +
+  theme_bw() +
+  ggtitle(stringr::str_interp("${hospital_name} - Monthly Waitlist Admissions and Additions"))
+
