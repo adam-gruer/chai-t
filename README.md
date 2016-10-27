@@ -12,6 +12,10 @@ https://www.rstudio.com/products/rstudio/download/
 **Using Git and RStudio together**
 http://happygitwithr.com/  
 
+**Using knitr::spin and an R file**
+http://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/
+
+
 
 
 
