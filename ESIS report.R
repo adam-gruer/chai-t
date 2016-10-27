@@ -25,7 +25,7 @@ library(lubridate)
 })
 #' ## Create some random test data for elective surgery waitlist report
 #' 
-set.seed(198)
+set.seed(198) #100
 waitlist <- tibble(
             month = seq.Date(
                             from = ymd("2015 Oct 01"),
@@ -102,6 +102,21 @@ change_description <- if (change < 0) {
 #'        " There were ${commentary_month_admitted} admissions from the waiting list and ${commentary_month_added}",
 #'          " children were added to the waiting list during the month."))`
 
+#+ monthly_movement-plot, echo = FALSE
+ggplot(data = waitlist) +
+  geom_bar(mapping = aes(
+    x = month,
+    y = patients_waiting_change,
+    fill = (patients_waiting_change > 0) ),
+    stat  = "identity",position = "dodge" ) +
+  guides(fill = FALSE) +
+  scale_x_date(date_breaks = "1 month",
+               date_labels = "%b %y") +
+  scale_y_continuous(name = "Change in waitlist") +
+  theme_bw() +
+  ggtitle(stringr::str_interp("${hospital_name} - Waiting List Monthly Change"))
+ 
+
 #' ### Monthly Admissions and Additions
 #+ admissions_additios-plot, echo = FALSE
 admissions_additions <- waitlist %>% 
@@ -111,7 +126,6 @@ admissions_additions <- waitlist %>%
   gather(waitlist_action,number_patients, -month)
 
 ggplot(admissions_additions) +
-
   geom_bar(mapping = aes(
     x = waitlist_action,
     y = number_patients ,
@@ -119,14 +133,13 @@ ggplot(admissions_additions) +
     position = "dodge",
     stat  = "identity") +
   facet_wrap(~month)+
-  
-  scale_y_continuous(name = "Patients") +
+  scale_y_continuous(name = "Patients", limits = c(0,1000)) +
   theme_bw() +
+  theme(legend.position = "bottom") +
   ggtitle(stringr::str_interp("${hospital_name} - Monthly Waitlist Admissions and Additions"))
 
 
-  ggplot(admissions_additions) +
-  
+ggplot(admissions_additions) +
   geom_bar(mapping = aes(
     x = month,
     y = number_patients ,
@@ -135,8 +148,9 @@ ggplot(admissions_additions) +
     stat  = "identity") +
   facet_wrap(~waitlist_action)+
   scale_x_date(date_breaks = "1 month",
-               date_labels = "%b %y") +
+               date_labels = "%b") +
   scale_y_continuous(name = "Patients") +
   theme_bw() +
+  theme(legend.position = "bottom") +
   ggtitle(stringr::str_interp("${hospital_name} - Monthly Waitlist Admissions and Additions"))
 
