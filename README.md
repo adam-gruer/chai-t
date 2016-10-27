@@ -3,13 +3,13 @@ demo of r markdown for chai -t
 
 ## resources
 
-** R language download **
+**R language download**
 https://cloud.r-project.org/  
 
-** R Studio download **
+**R Studio download**
 https://www.rstudio.com/products/rstudio/download/  
 
-** Using Git and RStudio together **
+**Using Git and RStudio together**
 http://happygitwithr.com/  
 
 
