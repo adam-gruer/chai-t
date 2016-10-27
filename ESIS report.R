@@ -29,5 +29,15 @@ waitlist <- tibble(
             month = seq.Date(
                             from = ymd("2015 Oct 31"),
                             to = ymd("2016 Oct 31"),
-                            by = "month" )
+                            by = "month" ),
+            ready_for_care_patients = sample(
+                                        1900:2000,
+                                        size = 13,
+                                        replace = TRUE),
+            admissions <- sample(
+                              600:900,
+                              size = 13,
+                              replace = TRUE)
+            
             )
+
