@@ -78,6 +78,33 @@ ggplot(data = waitlist) +
   theme_bw() +
   ggtitle(stringr::str_interp("${hospital_name} - Waiting List Trend"))
 
+#+ Commentary-data, echo = FALSE
+commentary_month <- last(waitlist$month) 
+commentary_month_name <- as.character(month(commentary_month,
+                               label = TRUE,
+                               abbr = FALSE))
+commentary_month_waitlist <- last(waitlist$patients_waiting)
+commentary_month_admitted <- last(waitlist$patients_admitted)
+prior_month_waitlist <- nth(waitlist$patients_waiting, -2L)
+commentary_month_added <- last(waitlist$patients_added)
+
+change <-  last(waitlist$patients_waiting_change)
+change_percent <-  as.double(change) / as.double(prior_month_waitlist) * 100.0
+change_description <- if (change < 0) {
+                      "decreased by"} else if (change > 0) {
+                        "increased by"} else {"remained unchanged"}
+
+ commentary <- stringr::str_interp(c("In ${commentary_month_name}, the waiting list for elective surgery ",
+                    "${change_description} ${change} ($[1.1f%%]{change_percent}) to ${commentary_month_waitlist}.",
+                      " There were ${commentary_month_admitted} admissions from the waiting list and ${commentary_month_added}",
+                     " children were added to the waiting list during the month."))
+ #' `r commentary`
+
+
+
+
+
+
 
   
 
