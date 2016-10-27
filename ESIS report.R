@@ -23,21 +23,26 @@ suppressPackageStartupMessages({
 library(tidyverse)
 library(lubridate)
 })
-#' ## Create some test data for elective surgery wailist report
+#' ## Create some random test data for elective surgery waitlist report
 #' 
 waitlist <- tibble(
             month = seq.Date(
                             from = ymd("2015 Oct 31"),
                             to = ymd("2016 Oct 31"),
                             by = "month" ),
-            ready_for_care_patients = sample(
+            patients_waiting = sample(
                                         1900:2000,
                                         size = 13,
                                         replace = TRUE),
-            admissions <- sample(
+            patients_admitted = sample(
                               600:900,
                               size = 13,
                               replace = TRUE)
             
             )
+#' ## Imperial Little'uns Hospital, North Haverbrook 
+#' ### Waitlist Data
+knitr::kable(
+            waitlist %>%
+              arrange(desc(month)))
 
