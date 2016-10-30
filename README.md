@@ -1,5 +1,7 @@
 # chai-t
 demo of r markdown for chai -t
+here is the current report: chai-t/ESIS_report.utf8.md
+
 
 ## resources
 
