@@ -1,6 +1,6 @@
 # chai-t
 demo of r markdown for chai -t
-here is the current report: chai-t/ESIS_report.utf8.md
+here is the current report: https://github.com/adam-gruer/chai-t/blob/master/ESIS_report.utf8.md
 
 
 ## resources
